@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+  		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+  		#l-map{height:100%;width:78%;float:left;border-right:2px solid #bcbcbc;}
+  		#r-result{height:100%;width:20%;float:left;}
+ 		</style>
+ 		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=xoUqeopS1Ib9jMI8Eb5iWgHkoXRkrqaf"></script>
+ 	<title>百度地图</title>
+ 	</head>
+ <body>
+ 	<div id="allmap"></div>
+ </body>
+ </html>
+ <script type="text/javascript">
+ 	var map = new BMap.Map("allmap");
+ 	map.centerAndZoom(new BMap.Point(108.947456,34.349343), 12);
+ 	map.enableScrollWheelZoom();                            //启用滚轮放大缩小
+ 	map.addControl(new BMap.NavigationControl());
+ 	map.addControl(new BMap.OverviewMapControl());
+ 	map.addControl(new BMap.ScaleControl());
+ 	map.enableScrollWheelZoom();
+ 	map.addControl(new BMap.MapTypeControl());
+ 	var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+ 	function justmarkfun(JD,WD)
+ 	{
+     	var marker1 = new BMap.Marker(new BMap.Point(JD,WD));  // 创建标注
+     	window.map.addOverlay(marker1);              // 将标注添加到地图中
+	}
+	enableGeolocation:true;
+	//添加定位组件
+	var geolocationControl= new BMap.GeolocationControl();
+	geolocationControl.addEventListener("locationSuccess", function(e){
+	//定位成功事件
+	var address = '';
+	address += e.addressComponent.province;
+	address += e.addressComponent.city;
+	address += e.addressComponent.district;
+	address += e.addressComponent.street;
+	address += e.addressComponent.streetNumber;
+	alert("当前定位地址为：" + address);
+	});
+	geolocationControl.addEventListener("locationError", function(e){
+	//定位失败事件
+	alert(e.message);
+	});
+	map.addControl(geolocationControl);
+ </script>

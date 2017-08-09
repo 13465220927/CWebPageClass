@@ -236,7 +236,7 @@ CString CWebPage::ScanJScript(CString& strAText, CStringArray& args)
 	while(!(strArg = GetNextToken(strArgs,",")).IsEmpty())
 		args.Add(strArg);
 
-	strAText= strSrc;
+	strAText = strSrc;
 	return strFunc;
 }
 
